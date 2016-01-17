@@ -3,19 +3,14 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="name"
+        android:id="@+id/clock_in_item_name"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="add_item"
-        android:id="@+id/add_item"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="add_record"
-        android:id="@+id/add_record"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="aaa"
-        android:id="@+id/tv"/>
+        android:text="add"
+        android:id="@+id/add_btn"/>
 </LinearLayout>

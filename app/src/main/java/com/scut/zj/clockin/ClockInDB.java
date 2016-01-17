@@ -9,6 +9,11 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class ClockInDB extends SQLiteOpenHelper{
 
+    public static final String CLOCK_IN_ITEM = "clock_in_item";
+    public static final String CLOCK_IN_RECORD = "clock_in_record";
+    public static final String CLOCK_IN_ITEM_RECORD = "clock_in_item_record";
+    public static final String DAY_EVALUATION_RECORD = "day_evaluation_record";
+
     public static final String ID = "id";
     public static final String RECORD_ID = "record_id";
 
@@ -34,27 +39,27 @@ public class ClockInDB extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE clock_in_item("
+        db.execSQL("CREATE TABLE "+CLOCK_IN_ITEM+"("
                 +ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"
                 +NAME+" TEXT NOT NULL,"
                 +REMINDING_TIME+" TEXT,"
                 +PRESET_HOUR+" INTEGER);");
-        db.execSQL("CREATE TABLE clock_in_record("
+        db.execSQL("CREATE TABLE "+CLOCK_IN_RECORD+"("
                 +ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"
                 +RATE+" INTEGER NOT NULL,"
                 +CLOCK_DATE+" TEXT NOT NULL,"
                 +CLOCK_HOUR+" INTEGER);");
-        db.execSQL("CREATE TABLE clock_in_item_record("
+        db.execSQL("CREATE TABLE "+CLOCK_IN_ITEM_RECORD+"("
                 +ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"
                 +ITEM_ID+" INTEGER NOT NULL,"
-                +RECORD_ID+" INTEGER NOT NULL"
-                +"FOREIGN KEY("+ITEM_ID+") REFERENCES clock_in_item("+ID+")"
-                +"FOREIGN KEY("+RECORD_ID+") REFERENCES clock_in_record("+ID+"));");
-        db.execSQL("CREATE TABLE day_evaluation_record("
+                +RECORD_ID+" INTEGER NOT NULL,"
+                +"FOREIGN KEY("+ITEM_ID+") REFERENCES "+CLOCK_IN_ITEM+"("+ID+"),"
+                +"FOREIGN KEY("+RECORD_ID+") REFERENCES "+CLOCK_IN_RECORD+"("+ID+"));");
+        db.execSQL("CREATE TABLE "+DAY_EVALUATION_RECORD+"("
                 +ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"
-                +EVALUATION+" TEXT NOT NULL"
-                +RECORD_ID+" INTEGER NOT NULL"
-                +"FOREIGN KEY("+RECORD_ID+") REFERENCES clock_in_record("+ID+"));");
+                +EVALUATION+" TEXT NOT NULL,"
+                +RECORD_ID+" INTEGER NOT NULL,"
+                +"FOREIGN KEY("+RECORD_ID+") REFERENCES "+CLOCK_IN_RECORD+"("+ID+"));");
     }
 
     @Override
